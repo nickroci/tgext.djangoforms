@@ -1,1 +1,4 @@
 /tgext.djangoforms.egg-info
+/dist
+/.project
+/.pydevproject
