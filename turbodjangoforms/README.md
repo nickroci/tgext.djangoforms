@@ -1,10 +1,9 @@
         About Turbo Django Forms
         -------------------------
         
-        AsyncJob is a TurboGears2 extension made to handle background/synchronous jobs.
-        Permits to quickly return responses to the user while the system performs more work on
-        background, it can be useful for video transcoding, thumbnails generation or other
-        tasks where the user cannot expect the require time before getting an answer.
+        Turbo Django Forms is a basic package that allows you to use Django forms
+        in turbogears. You should be able to follow the django documentation to
+        deal with validation etc but for TG.
         
         Installing
         -------------------------------
@@ -28,14 +27,45 @@
                 def __init__(self):
                     self.tdf = TDForms()
         
+        Creating Forms
+        ----------------------------
+        
+        Creating forms works the same as with standard Django::
+        
+            from django import forms
+    
+            class ContactForm(forms.Form):
+                subject = forms.CharField(max_length=100)
+                message = forms.CharField()
+                sender = forms.EmailField()
+                cc_myself = forms.BooleanField(required=False)
+        
+        Controller
+        ----------------------------
+        
+        You can follow most of the django forms tutorial::
+        
+            @expose('mysite.templates.index')
+            def index(self, **kw):
+                """Handle the front-page."""
+                if kw:
+                    form = ContactForm(kw)
+                    
+                    if form.is_valid():
+                        print form.cleaned_data
+                        //do stuff
+                        tg.flash("Form OK")
+                else:
+                    form = ContactForm()
+                    
+                return dict(page='Index', form=form)
+        
         Rendering Forms
         ----------------------------
         
-        You ::
+        You can use the standard django style template notation in your Genshi template - but add a g.tdf(...)::
         
-            from tgext.asyncjob import asyncjob_perform
-        
-            def background_task(number):
-                print number*2
-        
-            asyncjob_perform(background_task, 5)
+            <form>
+            ${g.tdf(form.as_p)}
+            <button>Submit</button>
+            </form>
