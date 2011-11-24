@@ -3,6 +3,8 @@ import setuptools
 from distutils.core import setup
 
 from sys import version
+from setuptools import find_packages
+
 if version < '2.2.3':
     from distutils.dist import DistributionMetadata
     DistributionMetadata.classifiers = None
@@ -25,9 +27,8 @@ setup(name='tgext.djangoforms',
         author='Nick Holden',
         author_email='nickpholden@gmail.com',
         url='https://github.com/nickpholden/tgext.djangoforms',
+        license='LGPL',
+        packages=find_packages(exclude=['ez_setup']),
         namespace_packages=['tgext'],
-        classifiers=[
-              'Programming Language :: Python :: 2',
-           ],
         #scripts = ['path/to/script']
         )
