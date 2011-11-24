@@ -11,12 +11,12 @@ Description: About Turbo Django Forms
         
         Turbo Django Forms is a basic package that allows you to use Django forms
         in turbogears. You should be able to follow the django documentation to
-        deal with validation etc but for TG.
+        deal with validation etc.
         
         Installing
         -------------------------------
         
-        tgext.asyncjob can be installed both from pypi::
+        tgext.djangoforms can be installed from pypi::
         
             pip install tgext.djangoforms
         
